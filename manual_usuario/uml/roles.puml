@@ -1,0 +1,47 @@
+@startuml
+title Roles de Usuario y Permisos
+
+left to right direction
+
+actor Administrador
+actor "Técnico" as Tecnico
+actor Operador
+
+rectangle "Módulos del Dashboard" {
+  usecase "Ver Dashboard" as Dashboard
+  usecase "Ver Logs" as Logs
+  usecase "Gestionar Usuarios" as Users
+}
+
+Administrador -- Dashboard
+Administrador -- Logs
+Administrador -- Users
+
+Tecnico -- Dashboard
+Tecnico -- Logs
+Tecnico -- Users
+
+Operador -- Dashboard
+Operador -- Logs
+
+note right of Administrador
+  **Permisos:**
+  - Acceso total a todas las vistas.
+  - Creación, modificación y
+    eliminación de usuarios.
+end note
+
+note right of Tecnico
+  **Permisos:**
+  - Acceso a todas las vistas.
+  - Visualización de usuarios.
+end note
+
+note right of Operador
+  **Permisos:**
+  - Acceso de solo lectura.
+  - Visualización del Dashboard y Logs.
+  - Sin acceso a la gestión de usuarios.
+end note
+
+@enduml

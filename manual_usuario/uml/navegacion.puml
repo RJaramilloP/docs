@@ -1,0 +1,20 @@
+@startuml
+title Flujo de Navegación del Dashboard
+
+start
+:Acceder a la URL y ver Login;
+-> "Usuario introduce credenciales";
+if (Autenticación exitosa?) then (Sí)
+  :Ver Dashboard Principal;
+  partition "Menú de Navegación" {
+    --> "Dashboard": Vista General
+    --> "Logs": Vista de Logs
+    --> "Usuarios": Gestión de Usuarios (si es Admin/Técnico)
+    --> "Logout": Salir
+  }
+else (No)
+  :Error de Login;
+  stop
+endif
+stop
+@enduml

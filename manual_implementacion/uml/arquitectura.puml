@@ -1,0 +1,50 @@
+@startuml
+!theme plain
+skinparam rectangle<<frame>> {
+  borderStyle solid
+  borderColor #333
+}
+skinparam node {
+  borderColor #333
+  backgroundColor #EEE
+}
+skinparam component {
+  borderColor #333
+  backgroundColor #DDD
+}
+skinparam database {
+  borderColor #333
+  backgroundColor #DDD
+}
+
+actor "Usuario (Admin/Técnico)" as User
+
+frame "Entorno de Alta Disponibilidad" {
+  node "Servidor Físico 1 (pve-node1)" as Node1 {
+    rectangle "Proxmox VE" {
+      rectangle "VM Aplicación (vm-dashboard)" as VM1 {
+        component "Docker Engine" as Docker1 {
+          component "App Web (Django)" as Web
+          component "Colector de Datos" as Collector
+          database "Base de Datos (PostgreSQL)" as DB
+        }
+      }
+    }
+  }
+
+  node "Servidor Físico 2 (pve-node2)" as Node2 {
+    rectangle "Proxmox VE" {
+       rectangle "VM Replicada (inactiva)" as VM2
+    }
+  }
+}
+
+User --> Web : Accede al Dashboard
+Web --> DB : Lee/Escribe datos
+Collector --> DB : Almacena métricas y eventos
+Collector --> Node1 : API Proxmox (métricas nodo/VM)
+Collector --> Docker1 : API Docker (métricas contenedores)
+
+Node1 <..> Node2 : Sincronización de Clúster y Replicación de VM
+
+@enduml

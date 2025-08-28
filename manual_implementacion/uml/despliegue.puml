@@ -1,0 +1,65 @@
+@startuml
+!theme plain
+title Flujo de Orquestación con configure_cluster_mejorado.sh
+
+actor "Operador" as Operator
+participant "Nodo 1 (pve-node1)" as Node1
+participant "Nodo 2 (pve-node2)" as Node2
+participant "VM Aplicación" as AppVM
+participant "Terraform" as TF
+participant "HA Manager" as HA
+
+Operator -> Node1: Conecta Pendrive de Datos
+Operator -> Node1: Ejecuta ./configure_cluster_mejorado.sh
+
+Node1 -> Node1: Valida dependencias y archivos del pendrive
+
+group Paso 1: Configuración SSH
+  Node1 -> Node2: Copia clave SSH
+  Node1 -> Node2: Actualiza /etc/hosts
+  Node2 -> Node1: Copia clave SSH (bidireccional)
+end
+
+group Paso 2: Creación del Clúster
+  Node1 -> Node1: pvecm create cluster-muni
+  Node1 -> Node2: pvecm add pve-node1 (vía API)
+end
+
+group Paso 3: Creación de Plantilla
+  Node1 -> Node1: qm create 9000 (VM base)
+  Node1 -> Node1: qm importdisk (desde .raw en pendrive)
+  Node1 -> Node1: qm template 9000
+end
+
+group Paso 4: Despliegue de VM con Terraform
+  Node1 -> TF: Prepara usuario y token API
+  Node1 -> TF: terraform init (con providers offline)
+  TF -> Node1: terraform apply (clona VM 9000)
+  activate TF
+  TF --> AppVM: Crea la VM
+  deactivate TF
+  Node1 <-- TF: Retorna ID de la VM
+end
+
+group Paso 5: Configuración de la Aplicación
+  Node1 -> AppVM: Espera por IP (qm agent)
+  Node1 -> AppVM: scp docker-compose.yml, images.tar, etc.
+  Node1 -> AppVM: ssh "bash /tmp/configure_vm.sh"
+  activate AppVM
+  AppVM -> AppVM: docker load < images.tar
+  AppVM -> AppVM: docker-compose up -d
+  deactivate AppVM
+end
+
+group Paso 6: Alta Disponibilidad (HA)
+  Node1 -> HA: ha-manager groupadd
+  Node1 -> HA: ha-manager add vm:<VM_ID>
+end
+
+group Paso 7: Replicación
+  Node1 -> Node1: pvesr create-local-job (replicar VM a Nodo 2)
+end
+
+Operator <-- Node1: Muestra "¡ORQUESTACIÓN COMPLETA!"
+
+@enduml
