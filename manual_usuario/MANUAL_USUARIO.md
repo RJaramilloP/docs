@@ -15,7 +15,7 @@ No te preocupes si no tienes conocimientos técnicos; aquí te explicaremos todo
 
 ## 2. Guía de Primeros Pasos
 
-Empezar a usar el dashboard es muy fácil. ¡Vamos a ello!
+Empezar a usar el dashboard es muy fácil. ¡Vamos a ver!
 
 ### 2.1. Cómo Iniciar Sesión
 
@@ -23,7 +23,7 @@ Empezar a usar el dashboard es muy fácil. ¡Vamos a ello!
 2.  **Ingresa tus credenciales:** Verás la pantalla de bienvenida. Escribe el **nombre de usuario** y la **contraseña** que te asignaron.
 3.  **Accede:** Haz clic en el botón **"Iniciar Sesión"**.
 
-> ![Página de Inicio de Sesión](imagenes/login.png)
+<img src="imagenes/login.jpeg" alt="Página de Inicio de Sesión" width="450"/>
 > *Imagen: Formulario de inicio de sesión.*
 
 ### 2.2. Un Vistazo a la Interfaz Principal
@@ -33,7 +33,7 @@ Una vez dentro, te encontrarás con una interfaz limpia y organizada:
 *   **Menú de Navegación (a la izquierda):** Es tu mapa para moverte por el sistema. Desde aquí puedes acceder a todas las secciones: `Dashboard`, `Logs` y `Usuarios`.
 *   **Área de Contenido (a la derecha):** Aquí es donde ocurre la magia. Verás toda la información de la sección que hayas seleccionado en el menú.
 
-`![Flujo de Navegación](uml/navegacion.puml)`
+<img src="imagenes/navegacion.png" alt="Flujo de Navegación" width="500"/>
 
 ---
 
@@ -45,7 +45,7 @@ Aquí te describimos las herramientas principales que tienes a tu disposición.
 
 Esta es la primera pantalla que verás y te da un resumen completo del estado de la infraestructura de un solo vistazo.
 
-> ![Vista del Dashboard Principal](imagenes/dashboard.png)
+<img src="imagenes/dashboard.jpeg" alt="Vista del Dashboard Principal" width="600"/>
 > *Imagen: Dashboard con tarjetas de monitoreo.*
 
 *   **¿Qué encontrarás?**
@@ -57,7 +57,7 @@ Esta es la primera pantalla que verás y te da un resumen completo del estado de
 
 Esta sección es como el diario de a bordo de la infraestructura. Registra absolutamente todo lo que sucede. Es muy útil para investigar problemas o entender qué ocurrió en un momento determinado.
 
-> ![Vista de la Página de Logs](imagenes/logs.png)
+<img src="imagenes/logs.jpeg" alt="Vista de la Página de Logs" width="600"/>
 > *Imagen: Tabla de logs con filtros y paginación.*
 
 *   **Instrucciones paso a paso:**
@@ -71,7 +71,7 @@ Esta sección es como el diario de a bordo de la infraestructura. Registra absol
 
 *   **Funcionalidades Adicionales:**
     *   **Crear Evento Manual:** Si realizas una acción importante (como un mantenimiento), puedes dejar constancia. Haz clic en **"Crear Evento Manual"**, rellena el formulario y tu anotación quedará guardada en el historial.
-    > ![Formulario de Evento Manual](imagenes/evento_manual.png)
+    > <img src="imagenes/evento_manual.jpeg" alt="Formulario de Evento Manual" width="400"/>
     > *Imagen: Formulario para la creación de un log manual.*
     *   **Exportar a CSV:** ¿Necesitas los datos para un informe? Aplica los filtros que quieras y haz clic en **"Exportar a CSV"** para descargar una hoja de cálculo con esa información.
 
@@ -79,15 +79,22 @@ Esta sección es como el diario de a bordo de la infraestructura. Registra absol
 
 Esta sección (visible solo para **Administradores** y **Técnicos**) permite gestionar las cuentas de las personas que usan este dashboard.
 
-> ![Página de Gestión de Usuarios](imagenes/usuarios.png)
+#### Roles de Usuario y Permisos
+
+El acceso a las funcionalidades del dashboard depende del rol asignado a cada usuario. El siguiente diagrama resume los permisos:
+
+<img src="imagenes/roles.png" alt="Diagrama de Roles y Permisos" width="500"/>
+*Diagrama: Relación entre roles de usuario y acceso a módulos del sistema.*
+
+<img src="imagenes/usuarios.jpeg" alt="Página de Gestión de Usuarios" width="600"/>
 > *Imagen: Lista de usuarios y formularios de gestión.*
 
 *   **Instrucciones paso a paso (para Administradores):**
     1.  **Crear un usuario:** Rellena el formulario "Crear Nuevo Usuario" con sus datos y asígnale un rol. El usuario podrá acceder inmediatamente.
-    > ![Formulario de Creación de Usuario](imagenes/crear_usuario.png)
+    > <img src="imagenes/crear_usuario.jpeg" alt="Formulario de Creación de Usuario" width="400"/>
     > *Imagen: Formulario para añadir un nuevo usuario.*
     2.  **Modificar un usuario:** Haz clic en "Modificar" junto a un usuario de la lista para cambiar su rol o sus datos.
-    > ![Formulario de Modificación de Usuario](imagenes/modificar_usuario.png)
+    > <img src="imagenes/modificar_usuario.jpeg" alt="Formulario de Modificación de Usuario" width="400"/>
     > *Imagen: Formulario para editar un usuario existente.*
     3.  **Eliminar un usuario:** Haz clic en "Eliminar" para dar de baja una cuenta. El sistema te pedirá confirmación.
 
