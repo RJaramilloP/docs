@@ -156,7 +156,7 @@ Una vez que el script orquestador finaliza, realice estas pruebas para verificar
     *   **Resultado Esperado:** Ambos nodos (`pve-node1`, `pve-node2`) deben aparecer con un icono verde, indicando que están online y en quórum.
 
 2.  **Verificar Estado de la VM y HA:**
-    *   **Acción:** En la vista de árbol, localice la VM `vm-dashboard` (ID 1000).
+    *   **Acción:** En la vista de árbol, localice la VM `vm-dashboard` (ID 100).
     *   **Resultado Esperado:** La VM debe estar en estado "running". En la pestaña "HA" del Datacenter, el recurso debe estar listado y activado.
 
 3.  **Verificar Acceso al Dashboard:**
